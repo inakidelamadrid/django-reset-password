@@ -47,10 +47,11 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "resetty.middleware.ResetPasswordMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    # Resetty must be placed after Session and Authentication Middleware
+    "resetty.middleware.ResetPasswordMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -119,6 +120,7 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
+#-------------------- RESETTY-------------------- 
 
 # Third-Parties begin here
 # --------------------DJANGO-NAOMI--------------------
@@ -126,3 +128,6 @@ STATIC_URL = "/static/"
 #
 EMAIL_BACKEND = "naomi.mail.backends.naomi.NaomiBackend"
 EMAIL_FILE_PATH = "naomi/"
+
+
+
