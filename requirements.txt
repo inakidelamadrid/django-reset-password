@@ -1,0 +1,6 @@
+Django==2.2.11
+django-extensions==2.2.9
+django-naomi==0.8
+pytz==2020.1
+six==1.15.0
+sqlparse==0.3.1

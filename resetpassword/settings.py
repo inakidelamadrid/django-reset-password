@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # third-party-apps
     "django_extensions",
+    "naomi",
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,7 @@ ROOT_URLCONF = "resetpassword.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'templates')],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -114,3 +115,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = "/static/"
+
+
+# Third-Parties begin here
+# --------------------DJANGO-NAOMI--------------------
+# https://github.com/edwinlunando/django-naomi
+#
+EMAIL_BACKEND = "naomi.mail.backends.naomi.NaomiBackend"
+EMAIL_FILE_PATH = "naomi/"
