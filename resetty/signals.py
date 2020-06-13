@@ -7,6 +7,15 @@ from .models import ResetPasswordExtra
 User = get_user_model()
 
 
+@receiver(post_save, sender=User)
+def create_password_details(sender, instance, created, **kwargs):
+    if created:
+        password_details = ResetPasswordExtra(
+            user=user, password_last_updated_at=date.today()
+        )
+        password_details.save()
+
+
 @receiver(pre_save, sender=User)
 def set_last_password_update(sender, **kwargs):
     user = kwargs.get("instance")

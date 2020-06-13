@@ -122,6 +122,8 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 #-------------------- RESETTY-------------------- 
+# it is the responsibility of the django app and not the package to set this values in the environent
+# if required
 RESETTY_USER_CATEGORIES_REQUIRING_RESET = ['is_staff']
 RESETTY_RESET_PASSWORD_DELTA = 30
 
