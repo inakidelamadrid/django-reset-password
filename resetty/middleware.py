@@ -3,22 +3,7 @@ from django.http import HttpResponseRedirect
 
 from .http import reset_password_redirect_url
 from .models import ResetPasswordExtra
-
-USER_CATEGORIES_REQUIRING_RESET = ["is_staff"]
-
-
-def password_due(user):
-    return not hasattr(user, "password_details")
-
-
-def should_reset_password(user):
-    return (
-        user.is_authenticated
-        and any(
-            [getattr(user, category) for category in USER_CATEGORIES_REQUIRING_RESET]
-        )
-        and password_due(user)
-    )
+from .reset_service import password_due, should_reset_password
 
 
 class ResetPasswordMiddleware(object):
