@@ -122,6 +122,9 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 #-------------------- RESETTY-------------------- 
+RESETTY_USER_CATEGORIES_REQUIRING_RESET = ['is_staff']
+RESETTY_RESET_PASSWORD_DELTA = 30
+
 
 # Third-Parties begin here
 # --------------------DJANGO-NAOMI--------------------

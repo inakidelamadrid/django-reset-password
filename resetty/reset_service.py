@@ -1,8 +1,5 @@
 from datetime import date
-
-USER_CATEGORIES_REQUIRING_RESET = ["is_staff"]
-RESET_PASSWORD_DELTA = 30
-
+from . import app_settings
 
 def calculate_days_passed(last_password_update_at, target=date.today()):
     return (target - last_password_update_at).days
@@ -10,7 +7,7 @@ def calculate_days_passed(last_password_update_at, target=date.today()):
 
 def password_has_due_date(password_details):
     last_password_update_at = password_details.password_last_updated_at
-    return calculate_days_passed(last_password_update_at) > RESET_PASSWORD_DELTA
+    return calculate_days_passed(last_password_update_at) > app_settings.RESET_PASSWORD_DELTA
 
 
 def password_due(user):
@@ -21,7 +18,7 @@ def should_reset_password(user):
     return (
         user.is_authenticated
         and any(
-            [getattr(user, category) for category in USER_CATEGORIES_REQUIRING_RESET]
+            [getattr(user, category) for category in app_settings.USER_CATEGORIES_REQUIRING_RESET]
         )
         and password_due(user)
     )
