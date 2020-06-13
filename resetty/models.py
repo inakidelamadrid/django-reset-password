@@ -4,5 +4,10 @@ from django.db.models.fields import DateField
 
 
 class ResetPasswordExtra(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, models.CASCADE)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        models.CASCADE,
+        primary_key=True,
+        related_name="password_details",
+    )
     password_last_updated_at = DateField()
