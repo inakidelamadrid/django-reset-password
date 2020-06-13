@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate
 from django.core.exceptions import ValidationError
 
+# https://sixfeetup.com/blog/custom-password-validators-in-django
 
 class DoNotReusePasswordValidator(object):
     def validate(self, password, user):
