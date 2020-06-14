@@ -3,7 +3,11 @@ from django.http import HttpResponseRedirect
 
 from .http import reset_password_redirect_url
 from .models import ResetPasswordExtra
-from .reset_service import password_due, should_reset_password
+from .reset_service import (
+    password_due,
+    path_excluded_from_redirect,
+    should_reset_password,
+)
 
 
 class ResetPasswordMiddleware(object):
@@ -11,9 +15,13 @@ class ResetPasswordMiddleware(object):
         self.get_response = get_response
 
     def __call__(self, request):
-
-        if should_reset_password(request.user) and not request.path.startswith('/accounts/reset/'):
-            return HttpResponseRedirect(reset_password_redirect_url(request.user))
+        if (
+            should_reset_password(request.user)
+            and not path_excluded_from_redirect(request.path)
+        ):
+            return HttpResponseRedirect(
+                reset_password_redirect_url(request.user, request.path)
+            )
 
         # the code above happens before subsequent middlewares in the stack and response
 
